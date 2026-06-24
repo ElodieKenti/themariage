@@ -1,0 +1,623 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Élodie & Kentigern — 12 septembre 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --black: #0a0a0a;
+    --white: #fafafa;
+    --gray-100: #f4f4f4;
+    --gray-200: #e8e8e8;
+    --gray-400: #aaaaaa;
+    --gray-600: #555555;
+    --gold: #b8964a;
+    --gold-light: #d4b06a;
+  }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--white);
+    color: var(--black);
+    font-family: 'Inter', sans-serif;
+    font-weight: 300;
+    line-height: 1.7;
+    font-size: 15px;
+    overflow-x: hidden;
+  }
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    background: rgba(250,250,250,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--gray-200);
+    display: flex;
+    justify-content: center;
+    gap: 2.5rem;
+    padding: 1rem 2rem;
+    flex-wrap: wrap;
+  }
+  nav a {
+    text-decoration: none;
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--gray-600);
+    transition: color 0.2s;
+  }
+  nav a:hover { color: var(--black); }
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 6rem 2rem 4rem;
+    position: relative;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at 50% 30%, rgba(184,150,74,0.06) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .hero-date {
+    font-size: 11px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 2rem;
+  }
+  .hero-names {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(3.5rem, 10vw, 7rem);
+    font-weight: 300;
+    line-height: 1;
+    letter-spacing: -0.01em;
+    color: var(--black);
+  }
+  .hero-names em { font-style: italic; font-weight: 300; }
+  .hero-amp {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2rem, 6vw, 4rem);
+    font-style: italic;
+    color: var(--gold);
+    display: block;
+    margin: 0.3rem 0;
+  }
+  .hero-location {
+    margin-top: 2.5rem;
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gray-400);
+  }
+  .divider-line {
+    width: 1px;
+    height: 80px;
+    background: linear-gradient(to bottom, transparent, var(--gold-light), transparent);
+    margin: 3rem auto;
+  }
+  section {
+    padding: 6rem 2rem;
+    max-width: 780px;
+    margin: 0 auto;
+  }
+  section.full-bg {
+    max-width: 100%;
+    background: var(--black);
+    color: var(--white);
+    padding: 6rem 2rem;
+  }
+  section.full-bg > .inner { max-width: 780px; margin: 0 auto; }
+  .section-label {
+    font-size: 10px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 1rem;
+  }
+  .section-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2rem, 5vw, 3.2rem);
+    font-weight: 300;
+    line-height: 1.1;
+    margin-bottom: 2.5rem;
+  }
+  section.full-bg .section-title { color: var(--white); }
+  .info-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5px;
+    background: var(--gray-200);
+    border: 1.5px solid var(--gray-200);
+    margin-top: 2rem;
+  }
+  .info-card { background: var(--white); padding: 2rem 1.75rem; }
+  .info-card-icon { font-size: 1.1rem; color: var(--gold); margin-bottom: 0.75rem; }
+  .info-card-label {
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gray-400);
+    margin-bottom: 0.4rem;
+  }
+  .info-card-value { font-size: 15px; font-weight: 400; color: var(--black); line-height: 1.5; }
+  .info-card-sub { font-size: 13px; color: var(--gray-600); margin-top: 0.3rem; }
+  a.map-link {
+    display: inline-block;
+    margin-top: 0.6rem;
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--gold);
+    text-decoration: none;
+    border-bottom: 1px solid rgba(184,150,74,0.3);
+    padding-bottom: 1px;
+    transition: border-color 0.2s;
+  }
+  a.map-link:hover { border-color: var(--gold); }
+  .timeline { position: relative; margin-top: 2rem; }
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 5.5rem;
+    top: 0; bottom: 0;
+    width: 1px;
+    background: var(--gray-200);
+  }
+  .tl-item { display: flex; gap: 2rem; margin-bottom: 2.5rem; align-items: flex-start; }
+  .tl-time {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.25rem;
+    font-style: italic;
+    color: var(--gold);
+    min-width: 4.5rem;
+    text-align: right;
+    padding-top: 0.1rem;
+  }
+  .tl-dot {
+    width: 9px; height: 9px;
+    border-radius: 50%;
+    background: var(--white);
+    border: 1.5px solid var(--gold);
+    margin-top: 0.5rem;
+    flex-shrink: 0;
+  }
+  .tl-content { flex: 1; }
+  .tl-title { font-weight: 500; font-size: 14px; letter-spacing: 0.05em; margin-bottom: 0.2rem; }
+  .tl-desc { font-size: 13px; color: var(--gray-600); }
+  .tl-place { color: var(--gold); font-size: 12px; letter-spacing: 0.03em; }
+  /* RSVP */
+  .rsvp-form { margin-top: 2.5rem; display: flex; flex-direction: column; gap: 1.25rem; }
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; }
+  .form-group { display: flex; flex-direction: column; gap: 0.4rem; }
+  .form-label {
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--white);
+    opacity: 0.6;
+  }
+  .form-input, .form-select, .form-textarea {
+    background: rgba(255,255,255,0.07);
+    border: 1px solid rgba(255,255,255,0.15);
+    color: var(--white);
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    font-weight: 300;
+    padding: 0.75rem 1rem;
+    outline: none;
+    transition: border-color 0.2s;
+    border-radius: 0;
+    -webkit-appearance: none;
+    width: 100%;
+  }
+  .form-select option { background: #1a1a1a; color: var(--white); }
+  .form-input:focus, .form-select:focus, .form-textarea:focus { border-color: var(--gold); }
+  .form-input::placeholder, .form-textarea::placeholder { color: rgba(255,255,255,0.3); }
+  .form-textarea { resize: vertical; min-height: 80px; }
+  .radio-group { display: flex; gap: 1rem; margin-top: 0.25rem; flex-wrap: wrap; }
+  .radio-label { display: flex; align-items: center; gap: 0.5rem; font-size: 14px; color: var(--white); cursor: pointer; }
+  .radio-label input[type="radio"] { accent-color: var(--gold); width: 16px; height: 16px; }
+  .btn-submit {
+    margin-top: 0.5rem;
+    background: transparent;
+    border: 1px solid var(--gold);
+    color: var(--gold);
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    font-weight: 400;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    padding: 1rem 2.5rem;
+    cursor: pointer;
+    transition: background 0.2s, color 0.2s;
+    align-self: flex-start;
+  }
+  .btn-submit:hover { background: var(--gold); color: var(--black); }
+  /* Tableau RSVP */
+  .rsvp-list-section { margin-top: 3rem; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 2rem; }
+  .rsvp-list-title {
+    font-size: 10px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 1.25rem;
+  }
+  .rsvp-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  .rsvp-table th {
+    text-align: left;
+    font-size: 9px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.35);
+    padding: 0 0.75rem 0.75rem 0;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+  }
+  .rsvp-table td {
+    padding: 0.65rem 0.75rem 0.65rem 0;
+    color: rgba(255,255,255,0.75);
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+    vertical-align: top;
+  }
+  .rsvp-table td.badge-oui {
+    color: var(--gold);
+    font-weight: 500;
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+  .rsvp-table td.badge-non { color: rgba(255,255,255,0.3); font-size: 11px; }
+  .rsvp-empty { font-size: 13px; color: rgba(255,255,255,0.3); font-style: italic; }
+  .export-btn {
+    margin-top: 1.25rem;
+    background: transparent;
+    border: 1px solid rgba(255,255,255,0.2);
+    color: rgba(255,255,255,0.5);
+    font-family: 'Inter', sans-serif;
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    padding: 0.6rem 1.25rem;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .export-btn:hover { border-color: var(--gold); color: var(--gold); }
+  footer { text-align: center; padding: 4rem 2rem; border-top: 1px solid var(--gray-200); }
+  .footer-names { font-family: 'Cormorant Garamond', serif; font-size: 1.8rem; font-style: italic; color: var(--black); }
+  .footer-sub { font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--gray-400); margin-top: 0.5rem; }
+  @media (max-width: 620px) {
+    nav { gap: 1.2rem; }
+    .info-grid { grid-template-columns: 1fr; }
+    .form-row { grid-template-columns: 1fr; }
+    .timeline::before { left: 4rem; }
+    .tl-time { min-width: 3.5rem; font-size: 1rem; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="#ceremonie">Cérémonie</a>
+  <a href="#programme">Programme</a>
+  <a href="#rsvp">RSVP</a>
+</nav>
+
+<div class="hero">
+  <p class="hero-date">Samedi · 12 Septembre 2026</p>
+  <h1 class="hero-names">
+    <em>Élodie</em>
+    <span class="hero-amp">&amp;</span>
+    <em>Kentigern</em>
+  </h1>
+  <p class="hero-location">Arnouville · Échouboulains</p>
+</div>
+
+<section id="ceremonie">
+  <p class="section-label">Le grand jour</p>
+  <h2 class="section-title">Informations pratiques</h2>
+
+  <div class="info-grid">
+    <div class="info-card">
+      <div class="info-card-icon">◈</div>
+      <div class="info-card-label">Sortie de la mariée</div>
+      <div class="info-card-value">11h00 — 2 rue de la Gironde</div>
+      <div class="info-card-sub">95400 Arnouville<br>Pour ceux qui souhaitent être présents</div>
+      <a class="map-link" href="https://www.google.com/maps/search/2+rue+de+la+Gironde+95400+Arnouville" target="_blank">Voir sur la carte →</a>
+    </div>
+
+    <div class="info-card">
+      <div class="info-card-icon">✦</div>
+      <div class="info-card-label">Cérémonie religieuse</div>
+      <div class="info-card-value">Église arménienne Sainte-Croix-de-Varak</div>
+      <div class="info-card-sub">33 Rue Saint-Just<br>95400 Arnouville · 11h30</div>
+      <a class="map-link" href="https://www.google.com/maps/place/33+Rue+Saint-Just,+95400+Arnouville" target="_blank">Voir sur la carte →</a>
+    </div>
+
+    <div class="info-card">
+      <div class="info-card-icon">◎</div>
+      <div class="info-card-label">Point de rassemblement cortège</div>
+      <div class="info-card-value">16h30 — Aire des Huit Routes</div>
+      <div class="info-card-sub">D213, 77370 Fontenailles<br>Départ en cortège vers la salle</div>
+      <a class="map-link" href="https://www.google.com/maps/search/Aire+des+huit+routes+D213+Fontenailles" target="_blank">Voir sur la carte →</a>
+    </div>
+
+    <div class="info-card">
+      <div class="info-card-icon">◇</div>
+      <div class="info-card-label">Lieu de réception</div>
+      <div class="info-card-value">Le Domaine des Rois — La Vénerie</div>
+      <div class="info-card-sub">RD213, 77830 Échouboulains<br>Cocktail dès 17h00</div>
+      <a class="map-link" href="https://www.google.com/maps/search/La+Venerie+RD213+77830+Echouboulains" target="_blank">Voir sur la carte →</a>
+    </div>
+
+    <div class="info-card">
+      <div class="info-card-icon">◉</div>
+      <div class="info-card-label">Contact</div>
+      <div class="info-card-value">Élodie</div>
+      <div class="info-card-value">Kentigern</div>
+    </div>
+
+    <div class="info-card">
+      <div class="info-card-icon">◻</div>
+      <div class="info-card-label">Réponse souhaitée avant le</div>
+      <div class="info-card-value">12 août 2026</div>
+      <div class="info-card-sub">Merci de confirmer votre présence<br>via le formulaire RSVP ci-dessous</div>
+    </div>
+  </div>
+</section>
+
+<section id="programme">
+  <p class="section-label">Déroulé de la journée</p>
+  <h2 class="section-title">Le programme</h2>
+
+  <div class="timeline">
+    <div class="tl-item">
+      <div class="tl-time">11h00</div>
+      <div class="tl-dot"></div>
+      <div class="tl-content">
+        <div class="tl-title">Départ de la mariée</div>
+        <div class="tl-desc"><span class="tl-place">2 rue de la Gironde, Arnouville</span><br>Rassemblement pour les personnes souhaitant accompagner Élodie et Kenti avant le début des célébrations.</div>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-time">11h30</div>
+      <div class="tl-dot"></div>
+      <div class="tl-content">
+        <div class="tl-title">Cérémonie religieuse</div>
+        <div class="tl-desc"><span class="tl-place">Église Sainte-Croix-de-Varak</span><br>Célébration de l'union d'Élodie et Kenti, entourés de leurs familles et de leurs proches.</div>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-time">13h–16h30</div>
+      <div class="tl-dot"></div>
+      <div class="tl-content">
+        <div class="tl-title">Séance photo & vidéo des mariés</div>
+        <div class="tl-desc">Temps exclusivement réservé aux mariés pour la réalisation des photos et vidéos de cette journée.</div>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-time">16h30</div>
+      <div class="tl-dot"></div>
+      <div class="tl-content">
+        <div class="tl-title">Rassemblement et départ du cortège</div>
+        <div class="tl-desc"><span class="tl-place">Aire des Huit Routes (D213, Fontenailles)</span><br>Rassemblement avant le départ en cortège vers la salle de réception.</div>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-time">17h00</div>
+      <div class="tl-dot"></div>
+      <div class="tl-content">
+        <div class="tl-title">Cocktail de bienvenue</div>
+        <div class="tl-desc"><span class="tl-place">Le Domaine des Rois</span><br>Accueil des invités, photos avec les mariés et buffet dinatoire.</div>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-time">19h00</div>
+      <div class="tl-dot"></div>
+      <div class="tl-content">
+        <div class="tl-title">Ouverture des festivités</div>
+        <div class="tl-desc">Installation des convives et début des festivités.</div>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-time">20h00</div>
+      <div class="tl-dot"></div>
+      <div class="tl-content">
+        <div class="tl-title">Dîner de réception</div>
+        <div class="tl-desc">Repas, discours et animations rythmeront cette soirée.</div>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-time">22h00</div>
+      <div class="tl-dot"></div>
+      <div class="tl-content">
+        <div class="tl-title">Ouverture du bal</div>
+        <div class="tl-desc">Ouverture de la piste de danse.</div>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-time">03h00</div>
+      <div class="tl-dot"></div>
+      <div class="tl-content">
+        <div class="tl-title">Clôture de la soirée</div>
+        <div class="tl-desc">Fin des festivités et bon retour à tous.</div>
+      </div>
+    </div>
+  </div>
+  <p style="margin-top: 3rem; font-size: 14px; color: var(--gray-600); text-align: center; letter-spacing: 0.05em; font-style: italic;">Merci de partager cette journée à nos côtés !</p>
+</section>
+
+<section class="full-bg" id="rsvp">
+  <div class="inner">
+    <p class="section-label" style="color: var(--gold);">Confirmer votre présence</p>
+    <h2 class="section-title">RSVP</h2>
+    <p style="color: rgba(255,255,255,0.5); font-size: 14px; margin-top: -1.5rem; margin-bottom: 2rem;">Réponse souhaitée avant le <strong style="color: rgba(255,255,255,0.75);">12 août 2026</strong>.</p>
+
+    <form class="rsvp-form" id="rsvpForm">
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label">Prénom</label>
+          <input class="form-input" id="f-prenom" type="text" placeholder="Votre prénom" required>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Nom</label>
+          <input class="form-input" id="f-nom" type="text" placeholder="Votre nom" required>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">Présence</label>
+        <div class="radio-group">
+          <label class="radio-label">
+            <input type="radio" name="presence" id="f-oui" value="oui" required> Avec grand plaisir ✓
+          </label>
+          <label class="radio-label">
+            <input type="radio" name="presence" id="f-non" value="non"> Je ne pourrai pas être là
+          </label>
+        </div>
+      </div>
+
+      <div id="bloc-adultes" style="display:none; flex-direction:column; gap:1.25rem;">
+        <div class="form-group">
+          <label class="form-label">Adultes présents — nom et prénom de chaque personne</label>
+          <textarea class="form-textarea" id="f-adultes" placeholder="Ex : Marie Dupont, Jean Martin, Sophie Leroy…" style="min-height:70px;"></textarea>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Enfants présents — nom et prénom (laisser vide si aucun)</label>
+          <textarea class="form-textarea" id="f-enfants" placeholder="Ex : Lucas Dupont (8 ans), Chloé Martin (5 ans)…" style="min-height:70px;"></textarea>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Régimes alimentaires ou allergies</label>
+          <textarea class="form-textarea" id="f-allergies" placeholder="Ex : Marie — végétarienne · Jean — allergie aux fruits à coque…" style="min-height:60px;"></textarea>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">Message pour les mariés (optionnel)</label>
+        <textarea class="form-textarea" id="f-message" placeholder="Un mot, une surprise, une question…"></textarea>
+      </div>
+
+      <button type="submit" class="btn-submit">Envoyer ma réponse</button>
+    </form>
+
+    <div id="successMsg" style="display:none; padding:1.25rem 1.5rem; border:1px solid rgba(184,150,74,0.4); color:var(--gold); font-size:14px; margin-top:1rem;">
+      Merci pour votre réponse — on a hâte de vous retrouver ! 🥂
+    </div>
+
+    <!-- Liste des réponses -->
+    <div class="rsvp-list-section" id="rsvpListSection" style="display:none;">
+      <div class="rsvp-list-title">Réponses reçues</div>
+      <table class="rsvp-table">
+        <thead>
+          <tr>
+            <th>Nom</th>
+            <th>Présence</th>
+            <th>Adultes</th>
+            <th>Enfants</th>
+            <th>Allergies</th>
+          </tr>
+        </thead>
+        <tbody id="rsvpTableBody"></tbody>
+      </table>
+      <button class="export-btn" id="exportBtn">↓ Exporter en CSV</button>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="divider-line"></div>
+  <div class="footer-names">Élodie & Kentigern</div>
+  <p class="footer-sub">12 Septembre 2026 · Arnouville · Échouboulains</p>
+</footer>
+
+<script>
+  // Afficher / masquer bloc adultes selon présence
+  document.querySelectorAll('input[name="presence"]').forEach(r => {
+    r.addEventListener('change', () => {
+      const bloc = document.getElementById('bloc-adultes');
+      bloc.style.display = r.value === 'oui' ? 'flex' : 'none';
+    });
+  });
+
+  // Stockage local des réponses
+  let rsvpData = JSON.parse(localStorage.getItem('rsvp_mariage') || '[]');
+
+  function renderTable() {
+    const tbody = document.getElementById('rsvpTableBody');
+    const section = document.getElementById('rsvpListSection');
+    if (rsvpData.length === 0) { section.style.display = 'none'; return; }
+    section.style.display = 'block';
+    tbody.innerHTML = rsvpData.map(r => `
+      <tr>
+        <td><strong style="color:var(--white);">${r.prenom} ${r.nom}</strong></td>
+        <td class="${r.presence === 'oui' ? 'badge-oui' : 'badge-non'}">${r.presence === 'oui' ? 'Présent·e' : 'Absent·e'}</td>
+        <td style="font-size:12px;">${r.adultes || '—'}</td>
+        <td style="font-size:12px;">${r.enfants || '—'}</td>
+        <td style="font-size:12px;">${r.allergies || '—'}</td>
+      </tr>
+    `).join('');
+  }
+
+  document.getElementById('rsvpForm').addEventListener('submit', async function(e) {
+    e.preventDefault();
+    const presence = document.querySelector('input[name="presence"]:checked').value;
+    const entry = {
+      prenom: document.getElementById('f-prenom').value.trim(),
+      nom: document.getElementById('f-nom').value.trim(),
+      presence,
+      adultes: presence === 'oui' ? document.getElementById('f-adultes').value.trim() : '',
+      enfants: presence === 'oui' ? document.getElementById('f-enfants').value.trim() : '',
+      allergies: presence === 'oui' ? document.getElementById('f-allergies').value.trim() : '',
+      message: document.getElementById('f-message').value.trim(),
+      date: new Date().toLocaleDateString('fr-FR')
+    };
+
+    // Envoi à Formspree
+    try {
+      await fetch('https://formspree.io/f/xeebedbr', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify({
+          'Prénom': entry.prenom,
+          'Nom': entry.nom,
+          'Présence': entry.presence === 'oui' ? 'Présent·e' : 'Absent·e',
+          'Adultes': entry.adultes || '—',
+          'Enfants': entry.enfants || '—',
+          'Allergies / Régimes': entry.allergies || '—',
+          'Message': entry.message || '—'
+        })
+      });
+    } catch(err) { console.error('Formspree error', err); }
+
+    // Stockage local
+    rsvpData.push(entry);
+    localStorage.setItem('rsvp_mariage', JSON.stringify(rsvpData));
+    this.style.display = 'none';
+    document.getElementById('successMsg').style.display = 'block';
+    renderTable();
+  });
+
+  document.getElementById('exportBtn').addEventListener('click', () => {
+    const headers = ['Prénom','Nom','Présence','Adultes','Enfants','Allergies','Message','Date'];
+    const rows = rsvpData.map(r => [r.prenom,r.nom,r.presence,r.adultes,r.enfants,r.allergies,r.message,r.date].map(v => `"${(v||'').replace(/"/g,'""')}"`));
+    const csv = [headers.join(','), ...rows.map(r => r.join(','))].join('\n');
+    const a = document.createElement('a');
+    a.href = 'data:text/csv;charset=utf-8,' + encodeURIComponent('\uFEFF' + csv);
+    a.download = 'rsvp_elodie_kentigern.csv';
+    a.click();
+  });
+
+  renderTable();
+</script>
+</body>
+</html>
